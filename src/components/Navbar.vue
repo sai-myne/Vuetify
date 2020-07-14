@@ -1,5 +1,11 @@
 <template>
     <nav>
+
+        <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+            <span>Awesome! You added a new project.</span>
+            <v-btn text color="white" @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
+
         <v-app-bar flat app>
             <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>      
             <v-toolbar-title class="text-uppercase grey--text">
@@ -39,7 +45,7 @@
                     </p>
                 </v-flex>
                 <v-flex class="mt-4 mb-3">
-                    <Popup />
+                    <Popup @projectAdded="snackbar = true" />
                 </v-flex>
             </v-layout>
             <v-list>
@@ -68,7 +74,8 @@ export default {
                 { icon: 'view-dashboard', text: 'Dashboard', route: '/' },
                 { icon: 'folder', text: 'My Projects', route: '/projects' },
                 { icon: 'account', text: 'Team', route: '/team' },
-            ]
+            ],
+            snackbar: false
         }
     }
 }
